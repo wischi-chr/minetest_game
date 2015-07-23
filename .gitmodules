@@ -5,3 +5,15 @@
 	path = mods/minetest-mod-mesecons
 	url = https://github.com/wischi-chr/minetest-mod-mesecons
 	branch = more-realistic
+[submodule "mods/moreblocks"]
+	path = mods/moreblocks
+	url = https://github.com/calinou/moreblocks/
+[submodule "mods/moreores"]
+	path = mods/moreores
+	url = https://github.com/calinou/moreores/
+[submodule "mods/pipeworks"]
+	path = mods/pipeworks
+	url = https://github.com/VanessaE/pipeworks.git
+[submodule "mods/unified_inventory"]
+	path = mods/unified_inventory
+	url = https://github.com/wischi-chr/unified_inventory.git
