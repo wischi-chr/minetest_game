@@ -57,12 +57,10 @@ VanessaE (WTFPL):
   default_nc_front.png
   default_nc_rb.png
   default_nc_side.png
-  default_grass_*.png
   default_desert_sand.png
   default_desert_stone.png
   default_desert_stone_brick.png
   default_sand.png
-  default_sandstone_brick.png
 
 Calinou (CC BY-SA):
   default_brick.png
@@ -94,7 +92,6 @@ InfinityProject (WTFPL):
 Splizard (CC BY-SA 3.0):
   default_snow.png
   default_snow_side.png
-  default_ice.png
   default_pine_sapling.png
 
 Zeg9 (CC BY-SA 3.0):
@@ -105,10 +102,23 @@ Zeg9 (CC BY-SA 3.0):
   default_gold_block.png
 
 paramat (CC BY-SA 3.0):
-  wieldhand.png, based on character.png by Jordach (CC BY-SA 3.0)
+  wieldhand.png, derived from character.png by Jordach (CC BY-SA 3.0)
   default_pinetree.png
   default_pinetree_top.png
   default_pinewood.png
+  default_sandstone_brick.png
+  default_obsidian_brick.png
+  default_river_water.png
+  default_river_water_source_animated.png
+  default_river_water_flowing_animated.png
+  default_acacia_leaves.png
+  default_acacia_sapling.png
+  default_acacia_tree.png
+  default_acacia_tree_top.png
+  default_acacia_wood.png
+  default_dry_grass.png
+  default_dry_grass_side.png
+  default_dry_grass_*.png
 
 brunob.santos (CC BY-SA 4.0):
   default_desert_cobble.png
@@ -121,7 +131,6 @@ BlockMen (CC BY-SA 3.0):
   default_gold_ingot.png
   default_tool_steelsword.png
   default_diamond.png
-  default_diamond_block.png
   default_book.png
   default_tool_*.png
   default_lava_source_animated.png
@@ -131,6 +140,8 @@ BlockMen (CC BY-SA 3.0):
   default_chest_lock.png
   default_chest_side.png
   default_chest_top.png
+  default_mineral_mese.png
+  default_meselamp.png
   bubble.png
   heart.png
   gui_*.png
@@ -145,6 +156,21 @@ Neuromancer (CC BY-SA 3.0):
 Philipbenr (CC BY-SA 3.0):
   default_grass.png
   default_grass_side.png
+
+Gambit (WTFPL):
+  default_bronze_ingot.png
+  default_copper_ingot.png
+  default_copper_lump.png
+  default_iron_lump.png
+  default_gold_lump.png
+  default_clay_lump.png
+  default_coal.png
+  default_grass_*.png
+  default_paper.png
+  default_diamond_block.png
+
+asl97 (WTFPL):
+  default_ice.png
 
 Glass breaking sounds (CC BY 3.0):
   1: http://www.freesound.org/people/cmusounddesign/sounds/71947/
@@ -185,14 +211,3 @@ Mito551 (sounds) (CC BY-SA):
   default_dirt_footstep.1.ogg
   default_dirt_footstep.2.ogg
   default_glass_footstep.ogg
-
-Gambit (WTFPL):
-  default_bronze_ingot.png
-  default_copper_ingot.png
-  default_copper_lump.png
-  default_iron_lump.png
-  default_gold_lump.png
-  default_clay_lump.png
-  default_coal.png
-  default_grass_*.png
-  default_paper.png
