@@ -1,3 +1,7 @@
 [submodule "mods/torches"]
 	path = mods/torches
 	url = https://github.com/wischi-chr/torches
+[submodule "mods/minetest-mod-mesecons"]
+	path = mods/minetest-mod-mesecons
+	url = https://github.com/wischi-chr/minetest-mod-mesecons
+	branch = more-realistic
