@@ -13,7 +13,7 @@
 	url = https://github.com/calinou/moreores/
 [submodule "mods/pipeworks"]
 	path = mods/pipeworks
-	url = https://github.com/VanessaE/pipeworks.git
+url=https://github.com/wischi-chr/pipeworks.git
 [submodule "mods/unified_inventory"]
 	path = mods/unified_inventory
 	url = https://github.com/wischi-chr/unified_inventory.git
