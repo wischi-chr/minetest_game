@@ -27,3 +27,6 @@
 [submodule "mods/datastorage"]
 	path = mods/datastorage
 	url = https://github.com/wischi-chr/datastorage.git
+[submodule "mods/sub0815-modpack"]
+	path = mods/sub0815-modpack
+	url = https://github.com/wischi-chr/sub0815-modpack.git
