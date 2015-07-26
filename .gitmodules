@@ -14,7 +14,7 @@
 [submodule "mods/pipeworks"]
 	path = mods/pipeworks
 	branch = 0815-pipes
-url=https://github.com/wischi-chr/pipeworks.git
+	url=https://github.com/wischi-chr/pipeworks.git
 [submodule "mods/unified_inventory"]
 	path = mods/unified_inventory
 	url = https://github.com/wischi-chr/unified_inventory.git
