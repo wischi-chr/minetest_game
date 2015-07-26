@@ -24,3 +24,6 @@
 [submodule "mods/technic"]
 	path = mods/technic
 	url = https://github.com/wischi-chr/technic
+[submodule "mods/datastorage"]
+	path = mods/datastorage
+	url = https://github.com/wischi-chr/datastorage.git
