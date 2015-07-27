@@ -1083,6 +1083,7 @@ minetest.register_node("default:water_flowing", {
 	liquidtype = "flowing",
 	liquid_alternative_flowing = "default:water_flowing",
 	liquid_alternative_source = "default:water_source",
+	liquid_renewable = false,
 	liquid_viscosity = 1,
 	post_effect_color = {a=120, r=30, g=60, b=90},
 	groups = {water=3, liquid=3, puts_out_fire=1, not_in_creative_inventory=1},
