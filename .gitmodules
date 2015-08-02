@@ -7,7 +7,7 @@
 	branch = more-realistic
 [submodule "mods/moreblocks"]
 	path = mods/moreblocks
-	url = https://github.com/calinou/moreblocks/
+	url = https://github.com/wischi-chr/moreblocks.git
 [submodule "mods/moreores"]
 	path = mods/moreores
 	url = https://github.com/calinou/moreores/
@@ -20,7 +20,7 @@
 	url = https://github.com/wischi-chr/unified_inventory.git
 [submodule "mods/xdecor"]
 	path = mods/xdecor
-	url = https://github.com/kilbith/xdecor.git
+	url = https://github.com/wischi-chr/xdecor.git
 [submodule "mods/technic"]
 	path = mods/technic
 	url = https://github.com/wischi-chr/technic
