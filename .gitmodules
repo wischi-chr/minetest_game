@@ -33,3 +33,6 @@
 [submodule "mods/currency"]
 	path = mods/currency
 	url = https://github.com/wischi-chr/currency.git
+[submodule "mods/areas"]
+	path = mods/areas
+	url = https://github.com/wischi-chr/areas.git
