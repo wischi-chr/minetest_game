@@ -30,3 +30,6 @@
 [submodule "mods/sub0815-modpack"]
 	path = mods/sub0815-modpack
 	url = https://github.com/wischi-chr/sub0815-modpack.git
+[submodule "mods/currency"]
+	path = mods/currency
+	url = https://github.com/wischi-chr/currency.git
