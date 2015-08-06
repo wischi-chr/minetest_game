@@ -36,3 +36,6 @@
 [submodule "mods/areas"]
 	path = mods/areas
 	url = https://github.com/wischi-chr/areas.git
+[submodule "mods/node_changed"]
+	path = mods/node_changed
+	url = https://github.com/wischi-chr/node_changed.git
