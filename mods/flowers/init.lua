@@ -1,21 +1,29 @@
 -- Minetest 0.4 mod: default
 -- See README.txt for licensing and other information.
 
+
 -- Namespace for functions
+
 flowers = {}
 
 
 -- Map Generation
+
 dofile(minetest.get_modpath("flowers") .. "/mapgen.lua")
 
 
+--
+-- Flowers
+--
+
 -- Aliases for original flowers mod
-minetest.register_alias("flowers:flower_dandelion_white", "flowers:dandelion_white")
-minetest.register_alias("flowers:flower_dandelion_yellow", "flowers:dandelion_yellow")
-minetest.register_alias("flowers:flower_geranium", "flowers:geranium")
+
 minetest.register_alias("flowers:flower_rose", "flowers:rose")
 minetest.register_alias("flowers:flower_tulip", "flowers:tulip")
+minetest.register_alias("flowers:flower_dandelion_yellow", "flowers:dandelion_yellow")
+minetest.register_alias("flowers:flower_geranium", "flowers:geranium")
 minetest.register_alias("flowers:flower_viola", "flowers:viola")
+minetest.register_alias("flowers:flower_dandelion_white", "flowers:dandelion_white")
 
 
 -- Flower registration
@@ -61,7 +69,58 @@ for _,item in pairs(flowers.datas) do
 end
 
 
+-- Flower spread
+
+minetest.register_abm({
+	nodenames = {"group:flora"},
+	neighbors = {"default:dirt_with_grass", "default:desert_sand"},
+	interval = 50,
+	chance = 25,
+	action = function(pos, node)
+		pos.y = pos.y - 1
+		local under = minetest.get_node(pos)
+		pos.y = pos.y + 1
+		if under.name == "default:desert_sand" then
+			minetest.set_node(pos, {name = "default:dry_shrub"})
+		elseif under.name ~= "default:dirt_with_grass" then
+			return
+		end
+
+		local light = minetest.get_node_light(pos)
+		if not light or light < 13 then
+			return
+		end
+
+		local pos0 = {x = pos.x - 4, y = pos.y - 4, z = pos.z - 4}
+		local pos1 = {x = pos.x + 4, y = pos.y + 4, z = pos.z + 4}
+		if #minetest.find_nodes_in_area(pos0, pos1, "group:flora_block") > 0 then
+			return
+		end
+
+		local flowers = minetest.find_nodes_in_area(pos0, pos1, "group:flora")
+		if #flowers > 3 then
+			return
+		end
+
+		local seedling = minetest.find_nodes_in_area(pos0, pos1, "default:dirt_with_grass")
+		if #seedling > 0 then
+			seedling = seedling[math.random(#seedling)]
+			seedling.y = seedling.y + 1
+			light = minetest.get_node_light(seedling)
+			if not light or light < 13 then
+				return
+			end
+			if minetest.get_node(seedling).name == "air" then
+				minetest.set_node(seedling, {name = node.name})
+			end
+		end
+	end,
+})
+
+
+--
 -- Mushrooms
+--
 
 local mushrooms_datas = {
 	{"brown", 2},
@@ -86,11 +145,12 @@ for _, m in pairs(mushrooms_datas) do
 		buildable_to = true,
 		groups = {snappy = 3, flammable = 3, attached_node = 1},
 		drop = {
+			max_items = 1,
 			items = {
-				{items = {"flowers:spores_" .. name}, rarity = 2,},
-				{items = {"flowers:spores_" .. name}, rarity = 2,},
-				{items = {"flowers:spores_" .. name}, rarity = 2,},
-				{items = {"flowers:mushroom_" .. name},},
+				{items = {"flowers:mushroom_" .. name}, rarity = 2,},
+				{items = {"flowers:mushroom_spores_" .. name}, rarity = 3,},
+				{items = {"flowers:mushroom_spores_" .. name .. " 2"}, rarity = 2,},
+				{items = {"flowers:mushroom_spores_" .. name .. " 3"}, rarity = 2,},
 			},
 		},
 		sounds = default.node_sound_leaves_defaults(),
@@ -101,15 +161,15 @@ for _, m in pairs(mushrooms_datas) do
 		}
 	})
 
-	-- Register spores
+	-- Register mushroom spores
 
-	minetest.register_node("flowers:spores_" .. name, {
+	minetest.register_node("flowers:mushroom_spores_" .. name, {
 		description = string.sub(string.upper(name), 0, 1) ..
 			string.sub(name, 2) .. " Mushroom Spores",
 		drawtype = "signlike",
-		tiles = {"flowers_spores_" .. name .. ".png"},
-		inventory_image = "flowers_spores_" .. name .. ".png",
-		wield_image = "flowers_spores_" .. name .. ".png",
+		tiles = {"flowers_mushroom_spores_" .. name .. ".png"},
+		inventory_image = "flowers_mushroom_spores_" .. name .. ".png",
+		wield_image = "flowers_mushroom_spores_" .. name .. ".png",
 		paramtype = "light",
 		paramtype2 = "wallmounted",
 		sunlight_propagates = true,
@@ -120,73 +180,28 @@ for _, m in pairs(mushrooms_datas) do
 		},
 		groups = {dig_immediate = 3, attached_node = 1},
 	})
-
-	-- Register growth ABMs
-
-	minetest.register_abm({
-		nodenames = {"flowers:spores_" .. name},
-		interval = 14,
-		chance = 25,
-		action = function(pos, node)
-			local node_under = minetest.get_node_or_nil({x = pos.x,
-				y = pos.y - 1, z = pos.z})
-			if not node_under then
-				return
-			end
-			if minetest.get_item_group(node_under.name, "soil") ~= 0 and
-					minetest.get_node_light(pos, nil) <= 13 then
-		 		minetest.set_node({x = pos.x, y = pos.y, z = pos.z},
-					{name = "flowers:mushroom_" .. name})
-			end
-		end
-	})
 end
 
 
--- Flower spread
+-- Register growing ABM
 
 minetest.register_abm({
-	nodenames = {"group:flora"},
-	neighbors = {"default:dirt_with_grass", "default:desert_sand"},
-	interval = 50,
-	chance = 25,
+	nodenames = {"flowers:mushroom_spores_brown", "flowers:mushroom_spores_red"},
+	interval = 11,
+	chance = 50,
 	action = function(pos, node)
-		pos.y = pos.y - 1
-		local under = minetest.get_node(pos)
-		pos.y = pos.y + 1
-		if under.name == "default:desert_sand" then
-			minetest.set_node(pos, {name = "default:dry_shrub"})
-		elseif under.name ~= "default:dirt_with_grass" then
+		local node_under = minetest.get_node_or_nil({x = pos.x,
+			y = pos.y - 1, z = pos.z})
+		if not node_under then
 			return
 		end
-		
-		local light = minetest.get_node_light(pos)
-		if not light or light < 13 then
-			return
-		end
-		
-		local pos0 = {x = pos.x - 4, y = pos.y - 4, z = pos.z - 4}
-		local pos1 = {x = pos.x + 4, y = pos.y + 4, z = pos.z + 4}
-		if #minetest.find_nodes_in_area(pos0, pos1, "group:flora_block") > 0 then
-			return
-		end
-		
-		local flowers = minetest.find_nodes_in_area(pos0, pos1, "group:flora")
-		if #flowers > 3 then
-			return
-		end
-		
-		local seedling = minetest.find_nodes_in_area(pos0, pos1, "default:dirt_with_grass")
-		if #seedling > 0 then
-			seedling = seedling[math.random(#seedling)]
-			seedling.y = seedling.y + 1
-			light = minetest.get_node_light(seedling)
-			if not light or light < 13 then
-				return
-			end
-			if minetest.get_node(seedling).name == "air" then
-				minetest.set_node(seedling, {name = node.name})
+		if minetest.get_item_group(node_under.name, "soil") ~= 0 and
+				minetest.get_node_light(pos, nil) <= 13 then
+			if node.name == "flowers:mushroom_spores_brown" then
+				minetest.set_node(pos, {name = "flowers:mushroom_brown"})
+			else
+				minetest.set_node(pos, {name = "flowers:mushroom_red"})
 			end
 		end
-	end,
+	end
 })
