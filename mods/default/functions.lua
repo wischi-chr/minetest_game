@@ -184,7 +184,7 @@ minetest.register_abm({
 
 minetest.register_abm({
 	nodenames = {"default:papyrus"},
-	neighbors = {"default:dirt", "default:dirt_with_grass"},
+	neighbors = {"default:dirt", "default:dirt_with_grass", "default:sand"},
 	interval = 50,
 	chance = 20,
 	action = function(...)

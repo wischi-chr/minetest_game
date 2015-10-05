@@ -651,6 +651,7 @@ minetest.register_node("default:acacia_leaves", {
 	drawtype = "allfaces_optional",
 	visual_scale = 1.3,
 	tiles = {"default_acacia_leaves.png"},
+	waving = 1,
 	paramtype = "light",
 	is_ground_content = false,
 	groups = {snappy = 3, leafdecay = 3, flammable = 2, leaves = 1},
@@ -751,11 +752,9 @@ minetest.register_node("default:bronzeblock", {
 minetest.register_node("default:stone_with_mese", {
 	description = "Mese Ore",
 	tiles = {"default_stone.png^default_mineral_mese.png"},
-	paramtype = "light",
 	groups = {cracky = 1},
 	drop = "default:mese_crystal",
 	sounds = default.node_sound_stone_defaults(),
-	light_source = 1,
 })
 
 minetest.register_node("default:mese", {
@@ -1648,8 +1647,9 @@ minetest.register_node("default:glass", {
 
 minetest.register_node("default:obsidian_glass", {
 	description = "Obsidian Glass",
-	drawtype = "glasslike",
-	tiles = {"default_obsidian_glass.png"},
+	drawtype = "glasslike_framed_optional",
+	tiles = {"default_obsidian_glass.png", "default_obsidian_glass_detail.png"},
+	inventory_image = minetest.inventorycube("default_obsidian_glass.png"),
 	paramtype = "light",
 	is_ground_content = false,
 	sunlight_propagates = true,
