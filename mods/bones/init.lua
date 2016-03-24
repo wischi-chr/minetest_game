@@ -5,24 +5,26 @@ bones = {}
 
 local function is_owner(pos, name)
 	local owner = minetest.get_meta(pos):get_string("owner")
-	if owner == "" or owner == name then
+	if owner == "" or owner == name or minetest.check_player_privs(name, "protection_bypass") then
 		return true
 	end
 	return false
 end
 
 bones.bones_formspec =
-	"size[8,9]"..
-	default.gui_bg..
-	default.gui_bg_img..
-	default.gui_slots..
-	"list[current_name;main;0,0.3;8,4;]"..
-	"list[current_player;main;0,4.85;8,1;]"..
-	"list[current_player;main;0,6.08;8,3;8]"..
+	"size[8,9]" ..
+	default.gui_bg ..
+	default.gui_bg_img ..
+	default.gui_slots ..
+	"list[current_name;main;0,0.3;8,4;]" ..
+	"list[current_player;main;0,4.85;8,1;]" ..
+	"list[current_player;main;0,6.08;8,3;8]" ..
+	"listring[current_name;main]" ..
+	"listring[current_player;main]" ..
 	default.get_hotbar_bg(0,4.85)
 
-local share_bones_time = tonumber(minetest.setting_get("share_bones_time") or 1200)
-local share_bones_time_early = tonumber(minetest.setting_get("share_bones_time_early") or (share_bones_time/4))
+local share_bones_time = tonumber(minetest.setting_get("share_bones_time")) or 1200
+local share_bones_time_early = tonumber(minetest.setting_get("share_bones_time_early")) or share_bones_time / 4
 
 minetest.register_node("bones:bones", {
 	description = "Bones",
@@ -43,7 +45,11 @@ minetest.register_node("bones:bones", {
 	
 	can_dig = function(pos, player)
 		local inv = minetest.get_meta(pos):get_inventory()
-		return is_owner(pos, player:get_player_name()) and inv:is_empty("main")
+		local name = ""
+		if player then
+			name = player:get_player_name()
+		end
+		return is_owner(pos, name) and inv:is_empty("main")
 	end,
 	
 	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
